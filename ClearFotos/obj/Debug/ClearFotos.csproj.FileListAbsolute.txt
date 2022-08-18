@@ -1,0 +1,6 @@
+C:\Users\cadas\source\repos\ImagemTools\ClearFotos\bin\Debug\ClearFotos.dll
+C:\Users\cadas\source\repos\ImagemTools\ClearFotos\bin\Debug\ClearFotos.pdb
+C:\Users\cadas\source\repos\ImagemTools\ClearFotos\obj\Debug\ClearFotos.csproj.AssemblyReference.cache
+C:\Users\cadas\source\repos\ImagemTools\ClearFotos\obj\Debug\ClearFotos.csproj.CoreCompileInputs.cache
+C:\Users\cadas\source\repos\ImagemTools\ClearFotos\obj\Debug\ClearFotos.dll
+C:\Users\cadas\source\repos\ImagemTools\ClearFotos\obj\Debug\ClearFotos.pdb

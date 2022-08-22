@@ -241,19 +241,42 @@ namespace Limpa_Imagem
 
         private void deletarBtnPasta_Click(object sender, EventArgs e)
         {
+            materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\n\n";
+            materialProgressBar2.Value = 0;
+            materialProgressBar2.Maximum = Global.resultGeralPasta.Count;
+
             foreach (string item in Global.resultGeralPasta)
             {
                 try
                 {
+                    File.Delete(item);
+
+                    materialProgressBar2.Value++;
                     BtnExecutePasta.Enabled = true;
-                    materialMultiLinePasta.Text = "Deletados com sucesso";
+                    materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\nDeletado: " + item ;
                 }
                 catch (Exception)
                 {
-                    materialMultiLinePasta.Text = "Erro ao deletar arquivo: ";
+                    materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\nErro ao deletar: " + item;
                     throw;
                 }
             }
+            BtnExecutePasta.Enabled = false;
+            deletarBtnPasta.Enabled = false;
+        }
+
+        private void materialTabControl1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+           // Task task = new Task(new Action(AbrirConexao));
+           // task.Start();
+           // await task;
+            ModalDBConn db = new ModalDBConn();
+            db.ShowDialog();
         }
 
         public void ZeraFotos()
@@ -264,6 +287,18 @@ namespace Limpa_Imagem
             materialButton3.Enabled = false;
         }
 
+        private void btnExeDb_Click(object sender, EventArgs e)
+        {
+            ConnDB meuDB = new ConnDB();
+
+            ConnDB.LerImagemColeta();
+        }
+
+        public void AbrirConexao()
+        {
+            ModalDBConn db = new ModalDBConn();
+            db.ShowDialog();
+        }
 
 
         //Execução da Pasta
@@ -420,11 +455,21 @@ namespace Limpa_Imagem
                                             
                                             Global.resultGeralPasta.Add(Global.listaImagens[i + falhas]);
 
-                                            materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\n" + i.ToString() + " - " + Global.listaImagens[i];
+                                            //Tratar a falha do ultimo item
                                             if (i ==  Global.listaImagens.Count  + falhas - 1)
                                             {
-                                                materialMultiLinePasta.Text = materialMultiLinePasta.Text + " x"; //deletar uma linha
+                                                Global.resultGeralPasta.RemoveAt(Global.resultGeralPasta.Count - 1);
+
+                                                //Exibir resultado
+                                                materialMultiLinePasta.Text = "Resultado de duplicatas:";
+                                                foreach (var item in Global.resultGeralPasta)
+                                                {
+                                                    materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\n" + item.ToString();
+                                                }
+
                                             }
+                                            //materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\n" + i.ToString() + " - " + Global.listaImagens[i];
+
                                         }
                                         else
                                         {

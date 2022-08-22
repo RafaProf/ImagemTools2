@@ -42,8 +42,12 @@
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblEtapaPasta = new MaterialSkin.Controls.MaterialLabel();
             this.materialProgressBar2 = new MaterialSkin.Controls.MaterialProgressBar();
             this.materialCard4 = new MaterialSkin.Controls.MaterialCard();
+            this.deletarBtnPasta = new MaterialSkin.Controls.MaterialButton();
+            this.lblFalhaPasta = new MaterialSkin.Controls.MaterialLabel();
+            this.lblPorcentPasta = new MaterialWinforms.Controls.MaterialLabel();
             this.EsperaLablPasta = new MaterialSkin.Controls.MaterialLabel();
             this.materialCard3 = new MaterialSkin.Controls.MaterialCard();
             this.materialMultiLinePasta = new MaterialSkin.Controls.MaterialMultiLineTextBox();
@@ -60,10 +64,9 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.lblPorcentPasta = new MaterialWinforms.Controls.MaterialLabel();
-            this.lblEtapaPasta = new MaterialSkin.Controls.MaterialLabel();
-            this.lblFalhaPasta = new MaterialSkin.Controls.MaterialLabel();
-            this.deletarBtnPasta = new MaterialSkin.Controls.MaterialButton();
+            this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
+            this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
+            this.btnExeDb = new MaterialSkin.Controls.MaterialButton();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.materialCard2.SuspendLayout();
@@ -74,6 +77,7 @@
             this.materialCard4.SuspendLayout();
             this.materialCard3.SuspendLayout();
             this.materialCardPasta.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -92,6 +96,7 @@
             this.materialTabControl1.SelectedIndex = 0;
             this.materialTabControl1.Size = new System.Drawing.Size(944, 508);
             this.materialTabControl1.TabIndex = 0;
+            this.materialTabControl1.Click += new System.EventHandler(this.materialTabControl1_Click);
             // 
             // tabPage1
             // 
@@ -269,6 +274,18 @@
             this.tabPage2.Text = "Por Pasta";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // lblEtapaPasta
+            // 
+            this.lblEtapaPasta.AutoSize = true;
+            this.lblEtapaPasta.Depth = 0;
+            this.lblEtapaPasta.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblEtapaPasta.Location = new System.Drawing.Point(640, 17);
+            this.lblEtapaPasta.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblEtapaPasta.Name = "lblEtapaPasta";
+            this.lblEtapaPasta.Size = new System.Drawing.Size(89, 19);
+            this.lblEtapaPasta.TabIndex = 7;
+            this.lblEtapaPasta.Text = "Etapa 1 de 2";
+            // 
             // materialProgressBar2
             // 
             this.materialProgressBar2.Depth = 0;
@@ -294,6 +311,52 @@
             this.materialCard4.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard4.Size = new System.Drawing.Size(315, 125);
             this.materialCard4.TabIndex = 5;
+            // 
+            // deletarBtnPasta
+            // 
+            this.deletarBtnPasta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.deletarBtnPasta.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.deletarBtnPasta.Depth = 0;
+            this.deletarBtnPasta.Enabled = false;
+            this.deletarBtnPasta.HighEmphasis = true;
+            this.deletarBtnPasta.Icon = null;
+            this.deletarBtnPasta.Location = new System.Drawing.Point(19, 84);
+            this.deletarBtnPasta.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.deletarBtnPasta.MouseState = MaterialSkin.MouseState.HOVER;
+            this.deletarBtnPasta.Name = "deletarBtnPasta";
+            this.deletarBtnPasta.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.deletarBtnPasta.Size = new System.Drawing.Size(84, 36);
+            this.deletarBtnPasta.TabIndex = 3;
+            this.deletarBtnPasta.Text = "Deletar";
+            this.deletarBtnPasta.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.deletarBtnPasta.UseAccentColor = false;
+            this.deletarBtnPasta.UseVisualStyleBackColor = true;
+            this.deletarBtnPasta.Click += new System.EventHandler(this.deletarBtnPasta_Click);
+            // 
+            // lblFalhaPasta
+            // 
+            this.lblFalhaPasta.AutoSize = true;
+            this.lblFalhaPasta.Depth = 0;
+            this.lblFalhaPasta.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblFalhaPasta.Location = new System.Drawing.Point(22, 59);
+            this.lblFalhaPasta.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblFalhaPasta.Name = "lblFalhaPasta";
+            this.lblFalhaPasta.Size = new System.Drawing.Size(105, 19);
+            this.lblFalhaPasta.TabIndex = 2;
+            this.lblFalhaPasta.Text = "Não são fotos:";
+            // 
+            // lblPorcentPasta
+            // 
+            this.lblPorcentPasta.AutoSize = true;
+            this.lblPorcentPasta.Depth = 0;
+            this.lblPorcentPasta.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblPorcentPasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.lblPorcentPasta.Location = new System.Drawing.Point(19, 39);
+            this.lblPorcentPasta.MouseState = MaterialWinforms.MouseState.HOVER;
+            this.lblPorcentPasta.Name = "lblPorcentPasta";
+            this.lblPorcentPasta.Size = new System.Drawing.Size(27, 18);
+            this.lblPorcentPasta.TabIndex = 1;
+            this.lblPorcentPasta.Text = "0%";
             // 
             // EsperaLablPasta
             // 
@@ -446,6 +509,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnExeDb);
+            this.tabPage3.Controls.Add(this.materialCard6);
+            this.tabPage3.Controls.Add(this.materialCard5);
             this.tabPage3.ImageKey = "tecnologia.png";
             this.tabPage3.Location = new System.Drawing.Point(4, 39);
             this.tabPage3.Name = "tabPage3";
@@ -453,6 +519,8 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Por DB";
             this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
+            this.tabPage3.Enter += new System.EventHandler(this.tabPage3_Click);
             // 
             // tabPage4
             // 
@@ -488,63 +556,51 @@
             this.openFileDialog2.FileName = "openFileDialog2";
             this.openFileDialog2.Title = "Escolher caminho-foto";
             // 
-            // lblPorcentPasta
+            // materialCard5
             // 
-            this.lblPorcentPasta.AutoSize = true;
-            this.lblPorcentPasta.Depth = 0;
-            this.lblPorcentPasta.Font = new System.Drawing.Font("Roboto", 11F);
-            this.lblPorcentPasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.lblPorcentPasta.Location = new System.Drawing.Point(19, 39);
-            this.lblPorcentPasta.MouseState = MaterialWinforms.MouseState.HOVER;
-            this.lblPorcentPasta.Name = "lblPorcentPasta";
-            this.lblPorcentPasta.Size = new System.Drawing.Size(27, 18);
-            this.lblPorcentPasta.TabIndex = 1;
-            this.lblPorcentPasta.Text = "0%";
+            this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard5.Depth = 0;
+            this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard5.Location = new System.Drawing.Point(417, 14);
+            this.materialCard5.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard5.Name = "materialCard5";
+            this.materialCard5.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard5.Size = new System.Drawing.Size(446, 437);
+            this.materialCard5.TabIndex = 0;
             // 
-            // lblEtapaPasta
+            // materialCard6
             // 
-            this.lblEtapaPasta.AutoSize = true;
-            this.lblEtapaPasta.Depth = 0;
-            this.lblEtapaPasta.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblEtapaPasta.Location = new System.Drawing.Point(640, 17);
-            this.lblEtapaPasta.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblEtapaPasta.Name = "lblEtapaPasta";
-            this.lblEtapaPasta.Size = new System.Drawing.Size(89, 19);
-            this.lblEtapaPasta.TabIndex = 7;
-            this.lblEtapaPasta.Text = "Etapa 1 de 2";
+            this.materialCard6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard6.Depth = 0;
+            this.materialCard6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard6.Location = new System.Drawing.Point(14, 100);
+            this.materialCard6.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard6.Name = "materialCard6";
+            this.materialCard6.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard6.Size = new System.Drawing.Size(392, 194);
+            this.materialCard6.TabIndex = 1;
             // 
-            // lblFalhaPasta
+            // btnExeDb
             // 
-            this.lblFalhaPasta.AutoSize = true;
-            this.lblFalhaPasta.Depth = 0;
-            this.lblFalhaPasta.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblFalhaPasta.Location = new System.Drawing.Point(22, 59);
-            this.lblFalhaPasta.MouseState = MaterialSkin.MouseState.HOVER;
-            this.lblFalhaPasta.Name = "lblFalhaPasta";
-            this.lblFalhaPasta.Size = new System.Drawing.Size(105, 19);
-            this.lblFalhaPasta.TabIndex = 2;
-            this.lblFalhaPasta.Text = "Não são fotos:";
-            // 
-            // deletarBtnPasta
-            // 
-            this.deletarBtnPasta.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.deletarBtnPasta.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.deletarBtnPasta.Depth = 0;
-            this.deletarBtnPasta.Enabled = false;
-            this.deletarBtnPasta.HighEmphasis = true;
-            this.deletarBtnPasta.Icon = null;
-            this.deletarBtnPasta.Location = new System.Drawing.Point(19, 84);
-            this.deletarBtnPasta.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.deletarBtnPasta.MouseState = MaterialSkin.MouseState.HOVER;
-            this.deletarBtnPasta.Name = "deletarBtnPasta";
-            this.deletarBtnPasta.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.deletarBtnPasta.Size = new System.Drawing.Size(84, 36);
-            this.deletarBtnPasta.TabIndex = 3;
-            this.deletarBtnPasta.Text = "Deletar";
-            this.deletarBtnPasta.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.deletarBtnPasta.UseAccentColor = false;
-            this.deletarBtnPasta.UseVisualStyleBackColor = true;
-            this.deletarBtnPasta.Click += new System.EventHandler(this.deletarBtnPasta_Click);
+            this.btnExeDb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnExeDb.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnExeDb.Depth = 0;
+            this.btnExeDb.HighEmphasis = true;
+            this.btnExeDb.Icon = null;
+            this.btnExeDb.Location = new System.Drawing.Point(121, 314);
+            this.btnExeDb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExeDb.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnExeDb.Name = "btnExeDb";
+            this.btnExeDb.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnExeDb.Size = new System.Drawing.Size(158, 36);
+            this.btnExeDb.TabIndex = 2;
+            this.btnExeDb.Text = "Executar";
+            this.btnExeDb.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnExeDb.UseAccentColor = false;
+            this.btnExeDb.UseVisualStyleBackColor = true;
+            this.btnExeDb.Click += new System.EventHandler(this.btnExeDb_Click);
             // 
             // Form1
             // 
@@ -573,6 +629,8 @@
             this.materialCard3.ResumeLayout(false);
             this.materialCardPasta.ResumeLayout(false);
             this.materialCardPasta.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -612,6 +670,9 @@
         private MaterialSkin.Controls.MaterialLabel lblEtapaPasta;
         private MaterialSkin.Controls.MaterialLabel lblFalhaPasta;
         private MaterialSkin.Controls.MaterialButton deletarBtnPasta;
+        private MaterialSkin.Controls.MaterialCard materialCard5;
+        private MaterialSkin.Controls.MaterialCard materialCard6;
+        private MaterialSkin.Controls.MaterialButton btnExeDb;
     }
 }
 

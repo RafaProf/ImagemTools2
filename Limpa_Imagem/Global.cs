@@ -18,6 +18,10 @@ namespace Limpa_Imagem
         public static List<string[]> listaPixels = new List<string[]>();  
         public static List <string> listaTamanho = new List<string>();
         public static List<string> resultGeralPasta = new List<string>();
+
+        public static List<string> listaImagemColeta = new List<string>();
+
+        public static string host, database, porta, usuario, senha;
         
     }
 }

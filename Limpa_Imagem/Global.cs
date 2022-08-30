@@ -23,5 +23,13 @@ namespace Limpa_Imagem
 
         public static string host, database, porta, usuario, senha;
         
+        public static void LimparListas()
+        {
+            listaImagens.Clear();
+            listaPixels.Clear();
+            listaTamanho.Clear();
+            resultGeralPasta.Clear();
+            //listaImagemColeta.Clear();
+        }
     }
 }

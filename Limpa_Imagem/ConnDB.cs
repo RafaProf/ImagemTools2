@@ -17,7 +17,7 @@ namespace Limpa_Imagem
         static string port = "5433";
         static string userName = "postgres";
         static string password = "#intellissis--40";
-        static string databaseName = "emt_ip_um";
+        static string databaseName = "feira_santana";
 
 
         static string ConnectionString = String.Format("Server={0};Port={1};User Id={2};Password={3};Database={4};",
@@ -44,6 +44,7 @@ namespace Limpa_Imagem
                                                host, porta, usuario, senha, database);
 
          NpgsqlConnection conexao = new NpgsqlConnection(ConnectionString);
+            conexao.Close();
 
             try
             {
@@ -85,11 +86,23 @@ namespace Limpa_Imagem
                 }
                 catch (Exception)
                 {
-
+                    MessageBox.Show("Erro ao obter dados");
                     throw;
                 }
             }
             return imagemColeta;
+        }
+
+        public static void DeletarFotosDB(string caminho, string nome)
+        {
+           // NpgsqlCommand cmd = new NpgsqlCommand(@"select * from imagens_coleta where caminho_imagem = '" + caminho + "' and nome_imagem = '" + nome + "'; ", connection);
+           
+            NpgsqlCommand cmd = new NpgsqlCommand(@"delete from imagens_coleta where caminho_imagem = '" + caminho + "' and nome_imagem = '" + nome + "'; ", connection);
+
+            NpgsqlDataReader dados = cmd.ExecuteReader();
+            dados.Read();
+           // MessageBox.Show(dados.GetString(5));
+           // connection.Close();
         }
 }
 }

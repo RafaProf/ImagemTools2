@@ -5,13 +5,19 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Interop;
+using System.Windows.Media;
 using MaterialSkin;
 using MaterialSkin.Controls;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using MS.WindowsAPICodePack.Internal;
+using Color = System.Drawing.Color;
+using Timer = System.Timers.Timer;
 
 //using MaterialWinforms;
 
@@ -20,13 +26,16 @@ namespace Limpa_Imagem
     public partial class Form1 : MaterialForm
     {
 
-        public static string nomeArquivo1, nomeArquivo2, bkpImg1, bkpImg2;
+        public static string nomeArquivo1, nomeArquivo2, bkpImg1, bkpImg2, carga;
         public Bitmap img1, img2;
         public int contador1 = 0, contador2 = 0;
         public bool flag = true;
         bool bt1, bt2 = false;
         double result_porcento = 0;
         int falhas = 0;
+        public List<string> imagensDbParaApagar = new List<string>();
+        StreamWriter valor2 = new StreamWriter("C:\\Users\\cadas\\Documents\\valor2.txt", true, Encoding.ASCII);
+        
 
         private List<string> auxPixels = new List<string>();
 
@@ -117,7 +126,7 @@ namespace Limpa_Imagem
             deletarBtnPasta.Enabled = false;
             materialProgressBar2.Value = 0;
             result_porcento = 0;
-            materialProgressBar2.Maximum = Global.listaImagens.Count - 1;
+            materialProgressBar2 .Maximum = Global.listaImagens.Count - 1;
             BtnExecutePasta.Enabled = false;
             
 
@@ -230,7 +239,9 @@ namespace Limpa_Imagem
             materialProgressBar1.BackColor = Color.Wheat;
             //materialProgressBar2.ForeColor = Color.DarkOrange;
             materialProgressBar2.BackColor = Color.LightBlue;
-
+            materialProgressBar3.BackColor = Color.LightBlue;
+            materialProgressBar3.ForeColor = Color.DarkOrange;
+            
 
         }
 
@@ -272,9 +283,12 @@ namespace Limpa_Imagem
 
         private void tabPage3_Click(object sender, EventArgs e)
         {
-           // Task task = new Task(new Action(AbrirConexao));
-           // task.Start();
-           // await task;
+            // Task task = new Task(new Action(AbrirConexao));
+            // task.Start();
+            // await task;
+            
+
+            
             ModalDBConn db = new ModalDBConn();
             db.ShowDialog();
         }
@@ -287,11 +301,97 @@ namespace Limpa_Imagem
             materialButton3.Enabled = false;
         }
 
-        private void btnExeDb_Click(object sender, EventArgs e)
+        private async void btnExeDb_Click(object sender, EventArgs e)
         {
             ConnDB meuDB = new ConnDB();
+            Global.listaImagemColeta.Clear();
 
-            ConnDB.LerImagemColeta();
+            Task task_limpar = new Task(new Action(ExeDbFotos));
+            task_limpar.Start();
+            await task_limpar;
+            MultTxtDB.Text += "\n Concluido";
+
+
+        }
+        delegate void ExeDbFotosCallback();
+        public void ExeDbFotos()
+        {
+
+            if (InvokeRequired)
+            {
+                ExeDbFotosCallback callback = ExeDbFotos;
+
+                Invoke(callback);
+            }
+            else
+            {
+                List<string> result = ConnDB.LerImagemColeta();
+                materialProgressBar3.Maximum = result.Count;
+                materialProgressBar3.Value = 0;
+
+
+                try
+                {
+                    MultTxtDB.Text = ""; float i = 0;
+                    materialProgressBar3.BackColor = Color.LightBlue;
+
+                    foreach (var item in result)
+                    {
+
+                        //Chamada do banco
+                        try
+                        {
+                            ExeComandoDb(item);
+                            double porcent = ((100.0 * i) / result.Count);
+                            lblEtapaDB.Text = "Etapa 1: " + porcent.ToString("F") + "%";
+                            materialProgressBar3.Value++;
+                            i++;
+                            
+                        }
+                        catch (Exception)
+                        {
+
+                            continue;
+                        }     
+                       
+                        
+                        
+                    }
+
+                    MultTxtDB.Text = "\nResultado duplicatas: \n";
+                    valor2.Close();
+                    StreamWriter valor = new StreamWriter("C:\\Users\\cadas\\Documents\\valor.txt", true, Encoding.ASCII);
+
+                    //Preenchendo multitexto
+                    foreach (var item in Global.listaImagemColeta)
+                    {
+                        //MultTxtDB.Text += item;
+
+                        try
+                        {
+                            //Abrir o arquivo e escrever
+                            valor.Write(item + "\n");
+                        }
+                        catch (Exception)
+                        {
+
+                            continue;
+                        }
+                       
+                    
+                    }
+
+                    valor.Close();
+                    
+                    //Apaga as fotos do banco
+                    DeletarDb();
+                }
+                catch (Exception)
+                {
+
+                    ;
+                }
+            }            
         }
 
         public void AbrirConexao()
@@ -300,6 +400,104 @@ namespace Limpa_Imagem
             db.ShowDialog();
         }
 
+        //Execução Banco de Dados
+        private void ExeComandoDb(string pastaFotos)
+        {
+
+            //string[] diretorios = Directory.GetDirectories("C:\\");
+            string[] arquivos = Directory.GetFiles(pastaFotos);
+
+            int x = 0;
+            Global.LimparListas();
+
+            //Capturando fotos da pasta
+            foreach (string item in arquivos)
+            {
+                Global.listaImagens.Add(item);
+            }
+
+            falhas = 0;
+            Global.listaImagens.Sort();
+
+            //Começar a quantização 
+            for (int y = 0; y < Global.listaImagens.Count; y++)
+            {
+
+                try
+                {
+                    //materialProgressBar2.Visible = true;
+                    Bitmap bitmap;
+
+                    foreach (var item in Global.listaImagens)
+                    {
+                        //caminho do arquivo
+                        string caminho = Global.listaImagens[x];
+
+                        //verificar tamanho
+                        FileInfo fileinfo = new FileInfo(caminho);
+                        if (fileinfo.Exists)
+                        {
+                            try
+                            {
+                                bitmap = new Bitmap(caminho);
+                                Global.listaTamanho.Add(fileinfo.Length.ToString());
+                                bitmap.Dispose();
+                            }
+                            catch
+                            {
+                                // Esse aquivo não é uma imagem.
+                                falhas++;
+                                x++;
+                                break;
+                            }
+
+
+                        }
+                        string[] aux = new string[200];
+                        string img1_ref;
+                        img1 = new Bitmap(caminho);
+                        int contAux = 0;
+
+
+                        for (int i = 0; i < img1.Width; i = i + 500)
+                        {
+                            for (int j = 0; j < img1.Height; j = j + 500)
+                            {
+                                img1_ref = img1.GetPixel(i, j).ToString();
+
+                                aux[contAux] = img1_ref;
+                                contAux++;
+
+
+                                //contador1++;
+                                //materialProgressBar2.Value++;
+
+                            }
+
+                        }
+
+                        Global.listaPixels.Add(aux);
+                       // AvançarProg(x);
+                        x++;
+
+                        img1.Dispose(); //importante
+                        aux = null;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    y++;
+                }
+            }
+
+            // Task task_limpar2 = new Task(new Action(GerarListaDB));
+            // task_limpar2.Start();
+            //await task_limpar2;
+            GerarListaDB();
+
+
+        }
 
         //Execução da Pasta
         public void ExeFotosPasta()
@@ -379,6 +577,86 @@ namespace Limpa_Imagem
             }
         }
 
+        private void btnExcluirDB_Click(object sender, EventArgs e)
+        {
+            string item = "\\\\192.168.0.5\\FeiraSantana01\\PS7372\\74387\\74387-1.JPG";
+                try
+                {
+
+
+                    ConnDB.DeletarFotosDB(item.Substring(0, item.LastIndexOf("\\"))
+                        , item.Split('\\')[6]);
+
+
+                }
+                catch (Exception)
+                {
+                    // materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\nErro ao deletar: " + item;
+                    throw;
+                }
+            
+        }
+
+        private void btnCargaDados_Click(object sender, EventArgs e)
+        {
+            openFileDialog3.FileName = "";
+            openFileDialog3.Title = "Texto";
+            openFileDialog3.Filter = "Texto Carga|*.txt;";
+            materialProgressBar3.Value = 0;
+            materialProgressBar3.Visible = true;
+            openFileDialog3.ShowDialog();
+            if (openFileDialog3.FileName.ToString() != "")
+            {
+                carga = openFileDialog3.FileName.ToString();
+
+            }
+
+
+
+            string arquivo = carga;
+            if (File.Exists(arquivo))
+            {
+                
+                materialProgressBar3.Maximum = File.ReadLines(arquivo).Count();
+
+                try
+                {
+                    using (StreamReader sr = new StreamReader(arquivo))
+                    {
+                        String linha;
+                        // Lê linha por linha até o final do arquivo
+                        while ((linha = sr.ReadLine()) != null)
+                        {
+                            try
+                            {
+                                Console.WriteLine(linha);
+                                ConnDB.FecharConexao(); ConnDB.connection.Open();
+                                ConnDB.DeletarFotosDB(linha.Substring(0, linha.LastIndexOf("\\"))
+                       , linha.Split('\\')[6]);
+                                materialProgressBar3.Value++;
+                            }
+                            catch (Exception)
+                            {
+
+                                continue;
+                            }
+                           
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine(" O arquivo " + arquivo + "não foi localizado !");
+            }
+            MessageBox.Show("Sucesso");
+            ConnDB.FecharConexao();
+        }
+
         delegate void AvançarProgCallback(int tt);
         public void AvançarProg(int tt) {
 
@@ -401,6 +679,7 @@ namespace Limpa_Imagem
                     lblPorcentPasta.Text = result_porcento.ToString("F") + "%";
                     lblFalhaPasta.Text = "Não são fotos: " + falhas.ToString() + "Item(s)";
                 }
+
                 
             }
 
@@ -491,8 +770,132 @@ namespace Limpa_Imagem
 
             
         }
-            
+
+        //delegate void GerarListaDBCallback();
+        public void GerarListaDB()
+        {
+
+
+
+            //materialMultiLinePasta.Text = "Processando seu resultado de duplicatas:";
+            try
+            {
+                for (int i = 0; i < Global.listaTamanho.Count; i++)
+                {
+                    //Comparação da primeira com as outras
+                    for (int y = 0; y < Global.listaTamanho.Count; y++)
+                    {
+
+                        //Recurso pra não pegar arquivos duplicados dos dois lados
+                        while (y <= i)
+                        {
+                            if (i != Global.listaTamanho.Count - 1)
+                            {
+                                y++;
+                            }
+                            else
+                            {
+                                break;
+
+                            }
+                        }
+
+                        //Se caminhos diferentes
+                        if (Global.listaImagens[i + falhas] != Global.listaImagens[y + falhas])
+                        {
+                            //Se tamanho igual
+                            if (Global.listaTamanho[i] == Global.listaTamanho[y])
+                            {
+                                //Se pixels iguais
+
+                                for (int b = 0; b < Global.listaPixels.Count / 10; b++)
+                                {
+                                    if (Global.listaPixels[i][b].Equals(Global.listaPixels[y][b]))
+                                    {
+
+                                        Global.resultGeralPasta.Add(Global.listaImagens[i + falhas]);
+                                       // Global.listaImagemColeta.Add(Global.listaImagens[i + falhas]);
+
+                                        //Tratar a falha do ultimo item
+                                        if (i == Global.listaImagens.Count + falhas - 1)
+                                        {
+                                            Global.resultGeralPasta.RemoveAt(Global.resultGeralPasta.Count - 1);
+                                            // Global.listaImagemColeta.RemoveAt(Global.listaImagemColeta.Count - 1);
+
+
+                                            //Exibir resultado
+                                            MultTxtDB.Text = "Resultado de duplicatas:";
+                                            foreach (var item in Global.resultGeralPasta)
+                                            {
+                                                MultTxtDB.Text = MultTxtDB.Text + "\n" + item.ToString();
+                                                Global.listaImagemColeta.Add(item);
+
+                                                try
+                                                {
+                                                    //Abrir o arquivo e escrever
+                                                    valor2.Write(item + "\n");
+                                                }
+                                                catch (Exception)
+                                                {
+
+                                                    continue;
+                                                }
+                                            }
+
+                                        }
+                                        //materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\n" + i.ToString() + " - " + Global.listaImagens[i];
+
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        //Deletar DB
+        public void DeletarDb()
+        {
+            StreamWriter valor_del = new StreamWriter("C:\\Users\\cadas\\Documents\\valor2.txt", true, Encoding.ASCII);
+
+            foreach (string item in Global.listaImagemColeta)
+            {
+                ConnDB.FecharConexao();ConnDB.connection.Open();
+                try
+                {
+                    //File.Delete(item);
+                    ConnDB.DeletarFotosDB(item.Substring(0, item.LastIndexOf("\\"))
+                        , item.Split('\\')[6]);
+                    //materialProgressBar2.Value++;
+
+                    // materialMultiLinePasta.Text = materialMultiLinePasta.Text + "\nDeletado: " + item;
+                }
+                catch (Exception)
+                {
+                    //MessageBox.Show("Falha ao deletar item: " + item);
+                    valor_del.Write(item + "\n");
+
+                    continue;
+                }
+            }
+            valor_del.Close();
+        }
+
+
+        
     }
+            
 }
 
 

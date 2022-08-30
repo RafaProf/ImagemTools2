@@ -59,14 +59,20 @@
             this.escolherBtnPasta = new MaterialSkin.Controls.MaterialButton();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnExcluirDB = new MaterialSkin.Controls.MaterialButton();
+            this.lblEtapaDB = new MaterialSkin.Controls.MaterialLabel();
+            this.materialProgressBar3 = new MaterialSkin.Controls.MaterialProgressBar();
+            this.btnExeDb = new MaterialSkin.Controls.MaterialButton();
+            this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
+            this.btnCargaDados = new MaterialSkin.Controls.MaterialButton();
+            this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
+            this.MultTxtDB = new MaterialSkin.Controls.MaterialMultiLineTextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
-            this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
-            this.btnExeDb = new MaterialSkin.Controls.MaterialButton();
+            this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.materialCard2.SuspendLayout();
@@ -78,6 +84,8 @@
             this.materialCard3.SuspendLayout();
             this.materialCardPasta.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.materialCard6.SuspendLayout();
+            this.materialCard5.SuspendLayout();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -509,6 +517,9 @@
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.btnExcluirDB);
+            this.tabPage3.Controls.Add(this.lblEtapaDB);
+            this.tabPage3.Controls.Add(this.materialProgressBar3);
             this.tabPage3.Controls.Add(this.btnExeDb);
             this.tabPage3.Controls.Add(this.materialCard6);
             this.tabPage3.Controls.Add(this.materialCard5);
@@ -521,6 +532,132 @@
             this.tabPage3.UseVisualStyleBackColor = true;
             this.tabPage3.Click += new System.EventHandler(this.tabPage3_Click);
             this.tabPage3.Enter += new System.EventHandler(this.tabPage3_Click);
+            // 
+            // btnExcluirDB
+            // 
+            this.btnExcluirDB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnExcluirDB.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnExcluirDB.Depth = 0;
+            this.btnExcluirDB.Enabled = false;
+            this.btnExcluirDB.HighEmphasis = true;
+            this.btnExcluirDB.Icon = null;
+            this.btnExcluirDB.Location = new System.Drawing.Point(224, 314);
+            this.btnExcluirDB.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExcluirDB.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnExcluirDB.Name = "btnExcluirDB";
+            this.btnExcluirDB.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnExcluirDB.Size = new System.Drawing.Size(73, 36);
+            this.btnExcluirDB.TabIndex = 5;
+            this.btnExcluirDB.Text = "teste..";
+            this.btnExcluirDB.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnExcluirDB.UseAccentColor = false;
+            this.btnExcluirDB.UseVisualStyleBackColor = true;
+            this.btnExcluirDB.Click += new System.EventHandler(this.btnExcluirDB_Click);
+            // 
+            // lblEtapaDB
+            // 
+            this.lblEtapaDB.AutoSize = true;
+            this.lblEtapaDB.Depth = 0;
+            this.lblEtapaDB.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblEtapaDB.Location = new System.Drawing.Point(34, 388);
+            this.lblEtapaDB.MouseState = MaterialSkin.MouseState.HOVER;
+            this.lblEtapaDB.Name = "lblEtapaDB";
+            this.lblEtapaDB.Size = new System.Drawing.Size(63, 19);
+            this.lblEtapaDB.TabIndex = 4;
+            this.lblEtapaDB.Text = "Etapa 1: ";
+            // 
+            // materialProgressBar3
+            // 
+            this.materialProgressBar3.Depth = 0;
+            this.materialProgressBar3.Location = new System.Drawing.Point(37, 439);
+            this.materialProgressBar3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialProgressBar3.Name = "materialProgressBar3";
+            this.materialProgressBar3.Size = new System.Drawing.Size(820, 5);
+            this.materialProgressBar3.TabIndex = 3;
+            // 
+            // btnExeDb
+            // 
+            this.btnExeDb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnExeDb.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnExeDb.Depth = 0;
+            this.btnExeDb.HighEmphasis = true;
+            this.btnExeDb.Icon = null;
+            this.btnExeDb.Location = new System.Drawing.Point(121, 314);
+            this.btnExeDb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnExeDb.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnExeDb.Name = "btnExeDb";
+            this.btnExeDb.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnExeDb.Size = new System.Drawing.Size(95, 36);
+            this.btnExeDb.TabIndex = 2;
+            this.btnExeDb.Text = "Executar";
+            this.btnExeDb.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnExeDb.UseAccentColor = false;
+            this.btnExeDb.UseVisualStyleBackColor = true;
+            this.btnExeDb.Click += new System.EventHandler(this.btnExeDb_Click);
+            // 
+            // materialCard6
+            // 
+            this.materialCard6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard6.Controls.Add(this.btnCargaDados);
+            this.materialCard6.Depth = 0;
+            this.materialCard6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard6.Location = new System.Drawing.Point(14, 100);
+            this.materialCard6.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard6.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard6.Name = "materialCard6";
+            this.materialCard6.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard6.Size = new System.Drawing.Size(392, 194);
+            this.materialCard6.TabIndex = 1;
+            // 
+            // btnCargaDados
+            // 
+            this.btnCargaDados.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCargaDados.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnCargaDados.Depth = 0;
+            this.btnCargaDados.HighEmphasis = true;
+            this.btnCargaDados.Icon = null;
+            this.btnCargaDados.Location = new System.Drawing.Point(18, 20);
+            this.btnCargaDados.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnCargaDados.MouseState = MaterialSkin.MouseState.HOVER;
+            this.btnCargaDados.Name = "btnCargaDados";
+            this.btnCargaDados.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnCargaDados.Size = new System.Drawing.Size(136, 36);
+            this.btnCargaDados.TabIndex = 3;
+            this.btnCargaDados.Text = "Deletar Carga";
+            this.btnCargaDados.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnCargaDados.UseAccentColor = false;
+            this.btnCargaDados.UseVisualStyleBackColor = true;
+            this.btnCargaDados.Click += new System.EventHandler(this.btnCargaDados_Click);
+            // 
+            // materialCard5
+            // 
+            this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard5.Controls.Add(this.MultTxtDB);
+            this.materialCard5.Depth = 0;
+            this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.materialCard5.Location = new System.Drawing.Point(417, 14);
+            this.materialCard5.Margin = new System.Windows.Forms.Padding(14);
+            this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialCard5.Name = "materialCard5";
+            this.materialCard5.Padding = new System.Windows.Forms.Padding(14);
+            this.materialCard5.Size = new System.Drawing.Size(446, 393);
+            this.materialCard5.TabIndex = 0;
+            // 
+            // MultTxtDB
+            // 
+            this.MultTxtDB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.MultTxtDB.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MultTxtDB.Depth = 0;
+            this.MultTxtDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.MultTxtDB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.MultTxtDB.Hint = "Dados";
+            this.MultTxtDB.Location = new System.Drawing.Point(18, 18);
+            this.MultTxtDB.MouseState = MaterialSkin.MouseState.HOVER;
+            this.MultTxtDB.Name = "MultTxtDB";
+            this.MultTxtDB.ReadOnly = true;
+            this.MultTxtDB.Size = new System.Drawing.Size(411, 358);
+            this.MultTxtDB.TabIndex = 0;
+            this.MultTxtDB.Text = "Lista de pastas que serão analisadas irá aparecer aqui.";
             // 
             // tabPage4
             // 
@@ -556,51 +693,9 @@
             this.openFileDialog2.FileName = "openFileDialog2";
             this.openFileDialog2.Title = "Escolher caminho-foto";
             // 
-            // materialCard5
+            // openFileDialog3
             // 
-            this.materialCard5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard5.Depth = 0;
-            this.materialCard5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard5.Location = new System.Drawing.Point(417, 14);
-            this.materialCard5.Margin = new System.Windows.Forms.Padding(14);
-            this.materialCard5.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCard5.Name = "materialCard5";
-            this.materialCard5.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard5.Size = new System.Drawing.Size(446, 437);
-            this.materialCard5.TabIndex = 0;
-            // 
-            // materialCard6
-            // 
-            this.materialCard6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.materialCard6.Depth = 0;
-            this.materialCard6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialCard6.Location = new System.Drawing.Point(14, 100);
-            this.materialCard6.Margin = new System.Windows.Forms.Padding(14);
-            this.materialCard6.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialCard6.Name = "materialCard6";
-            this.materialCard6.Padding = new System.Windows.Forms.Padding(14);
-            this.materialCard6.Size = new System.Drawing.Size(392, 194);
-            this.materialCard6.TabIndex = 1;
-            // 
-            // btnExeDb
-            // 
-            this.btnExeDb.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnExeDb.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnExeDb.Depth = 0;
-            this.btnExeDb.HighEmphasis = true;
-            this.btnExeDb.Icon = null;
-            this.btnExeDb.Location = new System.Drawing.Point(121, 314);
-            this.btnExeDb.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnExeDb.MouseState = MaterialSkin.MouseState.HOVER;
-            this.btnExeDb.Name = "btnExeDb";
-            this.btnExeDb.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnExeDb.Size = new System.Drawing.Size(158, 36);
-            this.btnExeDb.TabIndex = 2;
-            this.btnExeDb.Text = "Executar";
-            this.btnExeDb.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnExeDb.UseAccentColor = false;
-            this.btnExeDb.UseVisualStyleBackColor = true;
-            this.btnExeDb.Click += new System.EventHandler(this.btnExeDb_Click);
+            this.openFileDialog3.FileName = "openFileDialog3";
             // 
             // Form1
             // 
@@ -631,6 +726,9 @@
             this.materialCardPasta.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            this.materialCard6.ResumeLayout(false);
+            this.materialCard6.PerformLayout();
+            this.materialCard5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -673,6 +771,12 @@
         private MaterialSkin.Controls.MaterialCard materialCard5;
         private MaterialSkin.Controls.MaterialCard materialCard6;
         private MaterialSkin.Controls.MaterialButton btnExeDb;
+        private MaterialSkin.Controls.MaterialMultiLineTextBox MultTxtDB;
+        private MaterialSkin.Controls.MaterialProgressBar materialProgressBar3;
+        private MaterialSkin.Controls.MaterialLabel lblEtapaDB;
+        private MaterialSkin.Controls.MaterialButton btnExcluirDB;
+        private MaterialSkin.Controls.MaterialButton btnCargaDados;
+        private System.Windows.Forms.OpenFileDialog openFileDialog3;
     }
 }
 

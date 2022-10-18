@@ -32,15 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.materialTabControl1 = new MaterialSkin.Controls.MaterialTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnLimpar = new FontAwesome.Sharp.IconButton();
             this.materialProgressBar1 = new MaterialSkin.Controls.MaterialProgressBar();
             this.materialButton3 = new MaterialSkin.Controls.MaterialButton();
             this.materialButton2 = new MaterialSkin.Controls.MaterialButton();
             this.materialCard2 = new MaterialSkin.Controls.MaterialCard();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.materialButton1 = new MaterialSkin.Controls.MaterialButton();
             this.materialCard1 = new MaterialSkin.Controls.MaterialCard();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lblEtapaPasta = new MaterialSkin.Controls.MaterialLabel();
             this.materialProgressBar2 = new MaterialSkin.Controls.MaterialProgressBar();
@@ -64,6 +61,7 @@
             this.materialProgressBar3 = new MaterialSkin.Controls.MaterialProgressBar();
             this.btnExeDb = new MaterialSkin.Controls.MaterialButton();
             this.materialCard6 = new MaterialSkin.Controls.MaterialCard();
+            this.materialButton4 = new MaterialSkin.Controls.MaterialButton();
             this.btnCargaDados = new MaterialSkin.Controls.MaterialButton();
             this.materialCard5 = new MaterialSkin.Controls.MaterialCard();
             this.MultTxtDB = new MaterialSkin.Controls.MaterialMultiLineTextBox();
@@ -73,12 +71,15 @@
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog3 = new System.Windows.Forms.OpenFileDialog();
+            this.materialLabel3 = new MaterialSkin.Controls.MaterialLabel();
+            this.btnLimpar = new FontAwesome.Sharp.IconButton();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.txtLote = new MaterialSkin.Controls.MaterialTextBox();
             this.materialTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.materialCard2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.materialCard1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.materialCard4.SuspendLayout();
             this.materialCard3.SuspendLayout();
@@ -86,6 +87,8 @@
             this.tabPage3.SuspendLayout();
             this.materialCard6.SuspendLayout();
             this.materialCard5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // materialTabControl1
@@ -123,26 +126,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Comparar - Dual";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // btnLimpar
-            // 
-            this.btnLimpar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnLimpar.BackColor = System.Drawing.Color.Transparent;
-            this.btnLimpar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnLimpar.FlatAppearance.BorderSize = 0;
-            this.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLimpar.Flip = FontAwesome.Sharp.FlipOrientation.Vertical;
-            this.btnLimpar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnLimpar.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
-            this.btnLimpar.IconColor = System.Drawing.Color.OrangeRed;
-            this.btnLimpar.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.btnLimpar.Location = new System.Drawing.Point(398, 182);
-            this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Rotation = 180D;
-            this.btnLimpar.Size = new System.Drawing.Size(41, 77);
-            this.btnLimpar.TabIndex = 6;
-            this.btnLimpar.UseVisualStyleBackColor = false;
-            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
             // 
             // materialProgressBar1
             // 
@@ -209,15 +192,6 @@
             this.materialCard2.Size = new System.Drawing.Size(386, 377);
             this.materialCard2.TabIndex = 2;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(17, 17);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(352, 343);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
             // materialButton1
             // 
             this.materialButton1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -251,17 +225,6 @@
             this.materialCard1.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard1.Size = new System.Drawing.Size(386, 377);
             this.materialCard1.TabIndex = 0;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(17, 17);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(352, 343);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Tag = "localizacao";
-            this.pictureBox1.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.pictureBox1_LoadCompleted);
             // 
             // tabPage2
             // 
@@ -357,12 +320,12 @@
             // 
             this.lblPorcentPasta.AutoSize = true;
             this.lblPorcentPasta.Depth = 0;
-            this.lblPorcentPasta.Font = new System.Drawing.Font("Roboto", 11F);
+            this.lblPorcentPasta.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.lblPorcentPasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.lblPorcentPasta.Location = new System.Drawing.Point(19, 39);
             this.lblPorcentPasta.MouseState = MaterialWinforms.MouseState.HOVER;
             this.lblPorcentPasta.Name = "lblPorcentPasta";
-            this.lblPorcentPasta.Size = new System.Drawing.Size(27, 18);
+            this.lblPorcentPasta.Size = new System.Drawing.Size(29, 18);
             this.lblPorcentPasta.TabIndex = 1;
             this.lblPorcentPasta.Text = "0%";
             // 
@@ -398,7 +361,7 @@
             this.materialMultiLinePasta.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.materialMultiLinePasta.Depth = 0;
             this.materialMultiLinePasta.EnableAutoDragDrop = true;
-            this.materialMultiLinePasta.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialMultiLinePasta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F);
             this.materialMultiLinePasta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.materialMultiLinePasta.Location = new System.Drawing.Point(22, 18);
             this.materialMultiLinePasta.MouseState = MaterialSkin.MouseState.HOVER;
@@ -598,6 +561,9 @@
             // materialCard6
             // 
             this.materialCard6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.materialCard6.Controls.Add(this.materialLabel3);
+            this.materialCard6.Controls.Add(this.txtLote);
+            this.materialCard6.Controls.Add(this.materialButton4);
             this.materialCard6.Controls.Add(this.btnCargaDados);
             this.materialCard6.Depth = 0;
             this.materialCard6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
@@ -608,6 +574,26 @@
             this.materialCard6.Padding = new System.Windows.Forms.Padding(14);
             this.materialCard6.Size = new System.Drawing.Size(392, 194);
             this.materialCard6.TabIndex = 1;
+            // 
+            // materialButton4
+            // 
+            this.materialButton4.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.materialButton4.Density = MaterialSkin.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.materialButton4.Depth = 0;
+            this.materialButton4.HighEmphasis = true;
+            this.materialButton4.Icon = null;
+            this.materialButton4.Location = new System.Drawing.Point(201, 20);
+            this.materialButton4.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.materialButton4.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialButton4.Name = "materialButton4";
+            this.materialButton4.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.materialButton4.Size = new System.Drawing.Size(114, 36);
+            this.materialButton4.TabIndex = 4;
+            this.materialButton4.Text = "Limpar Lote";
+            this.materialButton4.Type = MaterialSkin.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.materialButton4.UseAccentColor = false;
+            this.materialButton4.UseVisualStyleBackColor = true;
+            this.materialButton4.Click += new System.EventHandler(this.materialButton4_Click_1);
             // 
             // btnCargaDados
             // 
@@ -648,7 +634,7 @@
             this.MultTxtDB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.MultTxtDB.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.MultTxtDB.Depth = 0;
-            this.MultTxtDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.MultTxtDB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F);
             this.MultTxtDB.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.MultTxtDB.Hint = "Dados";
             this.MultTxtDB.Location = new System.Drawing.Point(18, 18);
@@ -697,6 +683,79 @@
             // 
             this.openFileDialog3.FileName = "openFileDialog3";
             // 
+            // materialLabel3
+            // 
+            this.materialLabel3.AutoSize = true;
+            this.materialLabel3.Depth = 0;
+            this.materialLabel3.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel3.Location = new System.Drawing.Point(17, 144);
+            this.materialLabel3.MouseState = MaterialSkin.MouseState.HOVER;
+            this.materialLabel3.Name = "materialLabel3";
+            this.materialLabel3.Size = new System.Drawing.Size(104, 19);
+            this.materialLabel3.TabIndex = 6;
+            this.materialLabel3.Text = "Nome do Lote:";
+            // 
+            // btnLimpar
+            // 
+            this.btnLimpar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLimpar.BackColor = System.Drawing.Color.Transparent;
+            this.btnLimpar.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnLimpar.FlatAppearance.BorderSize = 0;
+            this.btnLimpar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLimpar.Flip = FontAwesome.Sharp.FlipOrientation.Vertical;
+            this.btnLimpar.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnLimpar.IconChar = FontAwesome.Sharp.IconChar.TrashAlt;
+            this.btnLimpar.IconColor = System.Drawing.Color.OrangeRed;
+            this.btnLimpar.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnLimpar.Location = new System.Drawing.Point(398, 182);
+            this.btnLimpar.Name = "btnLimpar";
+            this.btnLimpar.Rotation = 180D;
+            this.btnLimpar.Size = new System.Drawing.Size(41, 77);
+            this.btnLimpar.TabIndex = 6;
+            this.btnLimpar.UseVisualStyleBackColor = false;
+            this.btnLimpar.Click += new System.EventHandler(this.btnLimpar_Click);
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(17, 17);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(352, 343);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 0;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(17, 17);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(352, 343);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Tag = "localizacao";
+            this.pictureBox1.LoadCompleted += new System.ComponentModel.AsyncCompletedEventHandler(this.pictureBox1_LoadCompleted);
+            // 
+            // txtLote
+            // 
+            this.txtLote.AccessibleDescription = "Coloque o lote aqui";
+            this.txtLote.AccessibleName = "Lote";
+            this.txtLote.AnimateReadOnly = true;
+            this.txtLote.AutoWordSelection = true;
+            this.txtLote.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtLote.Depth = 0;
+            this.txtLote.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtLote.Hint = "Número/Nome do Lote";
+            this.txtLote.LeadingIcon = global::Limpa_Imagem.Properties.Resources.esboco;
+            this.txtLote.Location = new System.Drawing.Point(172, 127);
+            this.txtLote.MaxLength = 50;
+            this.txtLote.MouseState = MaterialSkin.MouseState.OUT;
+            this.txtLote.Multiline = false;
+            this.txtLote.Name = "txtLote";
+            this.txtLote.Size = new System.Drawing.Size(203, 50);
+            this.txtLote.TabIndex = 5;
+            this.txtLote.Text = "0";
+            this.txtLote.TrailingIcon = null;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -714,9 +773,7 @@
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.materialCard2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.materialCard1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             this.materialCard4.ResumeLayout(false);
@@ -729,6 +786,8 @@
             this.materialCard6.ResumeLayout(false);
             this.materialCard6.PerformLayout();
             this.materialCard5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -777,6 +836,9 @@
         private MaterialSkin.Controls.MaterialButton btnExcluirDB;
         private MaterialSkin.Controls.MaterialButton btnCargaDados;
         private System.Windows.Forms.OpenFileDialog openFileDialog3;
+        private MaterialSkin.Controls.MaterialButton materialButton4;
+        private MaterialSkin.Controls.MaterialTextBox txtLote;
+        private MaterialSkin.Controls.MaterialLabel materialLabel3;
     }
 }
 

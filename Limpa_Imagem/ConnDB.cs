@@ -90,8 +90,34 @@ namespace Limpa_Imagem
                     throw;
                 }
             }
+            dados.Close();
             return imagemColeta;
         }
+
+        public static List<string> LerImagemColetaPasta(string id_coleta)
+        {
+            NpgsqlCommand cmd = new NpgsqlCommand(@"select distinct caminho_imagem  from imagens_coleta where id_coleta = '"+id_coleta+"' order by caminho_imagem desc; ", connection);
+
+            NpgsqlDataReader dados = cmd.ExecuteReader();
+
+            List<string> imagemColeta = new List<string>();
+
+            while (dados.Read())
+            {
+                try
+                {
+                    imagemColeta.Add(dados.GetString(0));
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Erro ao obter dados");
+                    throw;
+                }
+            }
+            dados.Close();
+            return imagemColeta;
+        }
+
 
         public static void DeletarFotosDB(string caminho, string nome)
         {

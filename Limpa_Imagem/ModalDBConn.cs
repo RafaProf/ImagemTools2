@@ -49,6 +49,18 @@ namespace Limpa_Imagem
 
                 this.Close();
             }
+
+            if (ConnDB.Connected() == true)
+            {
+                ConnDB.FecharConexao();
+                meuDB.Conectar(txtHost.Text,
+                    txtPorta.Text,
+                    txtDatabase.Text,
+                    txtUsuario.Text,
+                    txtSenha.Text);
+
+                this.Close();
+            }
         }
 
         

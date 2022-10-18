@@ -34,7 +34,10 @@ namespace Limpa_Imagem
         double result_porcento = 0;
         int falhas = 0;
         public List<string> imagensDbParaApagar = new List<string>();
-        StreamWriter valor2 = new StreamWriter("C:\\Users\\cadas\\Documents\\valor2.txt", true, Encoding.ASCII);
+        StreamWriter valor2 = new StreamWriter("C:\\Users\\Public\\temp.txt", true, Encoding.ASCII);
+
+
+        
         
 
         private List<string> auxPixels = new List<string>();
@@ -241,8 +244,78 @@ namespace Limpa_Imagem
             materialProgressBar2.BackColor = Color.LightBlue;
             materialProgressBar3.BackColor = Color.LightBlue;
             materialProgressBar3.ForeColor = Color.DarkOrange;
+
+            CriarLog();
             
 
+        }
+
+        public void CriarLog()
+        {
+            FileInfo temp = new FileInfo("C:\\Users\\Public\\temp.txt");
+            FileInfo temp2 = new FileInfo("C:\\Users\\Public\\temp2.txt");
+            FileInfo temp3 = new FileInfo("C:\\Users\\Public\\log_fotos.txt");
+
+            if (temp.Exists)
+            {
+                Console.WriteLine("Arquivo existente " + temp.FullName);
+            }
+            else
+            {
+
+            }
+            if (temp2.Exists)
+            {
+                Console.WriteLine("Arquivo existente " + temp2.FullName);
+            }
+            else
+            {
+
+            }
+            if (temp3.Exists)
+            {
+                Console.WriteLine("Arquivo existente " + temp3.FullName);
+            }
+            else
+            {
+
+            }
+
+            
+        }
+        public void DeleLog()
+        {
+            FileInfo temp = new FileInfo("C:\\Users\\Public\\temp.txt");
+            FileInfo temp2 = new FileInfo("C:\\Users\\Public\\temp2.txt");
+            FileInfo temp3 = new FileInfo("C:\\Users\\Public\\log_fotos.txt");
+
+            if (temp.Exists)
+            {
+                Console.WriteLine("Deletando " + temp.FullName);
+                temp.Delete();
+            }
+            else
+            {
+
+            }
+            if (temp2.Exists)
+            {
+                Console.WriteLine("Deletando " + temp2.FullName);
+                temp2.Delete(); 
+            }
+            else
+            {
+
+            }
+            if (temp3.Exists)
+            {
+                Console.WriteLine("Deletando " + temp3.FullName);
+                temp3.Delete();
+            }
+            else
+            {
+
+            }
         }
 
         private void tabPage1_Click(object sender, EventArgs e)
@@ -306,6 +379,8 @@ namespace Limpa_Imagem
             ConnDB meuDB = new ConnDB();
             Global.listaImagemColeta.Clear();
 
+
+            //Tasks e await
             Task task_limpar = new Task(new Action(ExeDbFotos));
             task_limpar.Start();
             await task_limpar;
@@ -314,6 +389,7 @@ namespace Limpa_Imagem
 
         }
         delegate void ExeDbFotosCallback();
+        delegate void ExeDbFotosCallback2();
         public void ExeDbFotos()
         {
 
@@ -326,7 +402,7 @@ namespace Limpa_Imagem
             else
             {
                 List<string> result = ConnDB.LerImagemColeta();
-                materialProgressBar3.Maximum = result.Count;
+                materialProgressBar3.Maximum = result.Count-1;
                 materialProgressBar3.Value = 0;
 
 
@@ -392,6 +468,87 @@ namespace Limpa_Imagem
                     ;
                 }
             }            
+        }
+
+        public void ExeDbFotosPorPasta()
+        {
+
+            if (InvokeRequired)
+            {
+                ExeDbFotosCallback2 callback = ExeDbFotosPorPasta;
+
+                Invoke(callback);
+            }
+            else
+            {
+                List<string> result = ConnDB.LerImagemColetaPasta(txtLote.Text);
+                materialProgressBar3.Maximum = result.Count-1;
+                materialProgressBar3.Value = 0;
+
+
+                try
+                {
+                    MultTxtDB.Text = ""; float i = 0;
+                    materialProgressBar3.BackColor = Color.LightBlue;
+
+                    foreach (var item in result)
+                    {
+
+                        //Chamada do banco
+                        try
+                        {
+                            ExeComandoDb(item);
+                            double porcent = ((100.0 * i) / result.Count);
+                            lblEtapaDB.Text = "Etapa 1: " + porcent.ToString("F") + "%";
+                            materialProgressBar3.Value++;
+                            i++;
+
+                        }
+                        catch (Exception)
+                        {
+
+                            continue;
+                        }
+
+
+
+                    }
+
+                    MultTxtDB.Text = "\nResultado duplicatas: \n";
+                    valor2.Close();
+                    valor2.Dispose();
+                    StreamWriter valor = new StreamWriter("C:\\Users\\Public\\temp2.txt", true, Encoding.ASCII);
+
+                    //Preenchendo multitexto
+                    foreach (var item in Global.listaImagemColeta)
+                    {
+                        //MultTxtDB.Text += item;
+
+                        try
+                        {
+                            //Abrir o arquivo e escrever
+                            valor.Write(item + "\n");
+                        }
+                        catch (Exception)
+                        {
+
+                            continue;
+                        }
+
+
+                    }
+
+                    valor.Close();
+
+                    //Apaga as fotos do banco
+                    DeletarDb();
+                }
+                catch (Exception)
+                {
+
+                    ;
+                }
+            }
         }
 
         public void AbrirConexao()
@@ -595,6 +752,23 @@ namespace Limpa_Imagem
                     throw;
                 }
             
+        }
+
+
+        //Excluir por pasta -- DB
+        private async void materialButton4_Click_1(object sender, EventArgs e)
+        {
+            //Deletar por Pasta**************
+
+            ConnDB meuDB = new ConnDB();
+            Global.listaImagemColeta.Clear();
+
+            Task task_limpar = new Task(new Action(ExeDbFotosPorPasta));
+            task_limpar.Start();
+            await task_limpar;
+            MultTxtDB.Text += "\n Concluido";
+
+
         }
 
         private void btnCargaDados_Click(object sender, EventArgs e)
@@ -867,7 +1041,7 @@ namespace Limpa_Imagem
         //Deletar DB
         public void DeletarDb()
         {
-            StreamWriter valor_del = new StreamWriter("C:\\Users\\cadas\\Documents\\valor2.txt", true, Encoding.ASCII);
+            StreamWriter valor_del = new StreamWriter("C:\\Users\\Public\\log_fotos.txt", true, Encoding.ASCII);
 
             foreach (string item in Global.listaImagemColeta)
             {
@@ -890,6 +1064,19 @@ namespace Limpa_Imagem
                 }
             }
             valor_del.Close();
+
+            try
+            {
+                
+                valor2.Close();
+                DeleLog();
+
+            }
+            catch (Exception)
+            {
+
+                ;
+            }
         }
 
 
